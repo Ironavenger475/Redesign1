@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Dashboard</title>
+    <script src="https://d3js.org/d3.v6.min.js"></script>
+    <script src="topojson.v3.js"></script>
+    <script defer src="heatmap.js"></script>
+    <script defer src="dashboard.js"></script>
+    <link rel="stylesheet" href="split.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="split left">
+    <h2><p align="center">Dashboard</p></h2>
+    <label for="dropdown1"></label>
+    <select id="dropdown1"><option selected disabled>Select for the X-Axis:</option></select>
+    <label for="dropdown2"></label>
+    <select id="dropdown2"><option selected disabled>Select for the Y-Axis:</option></select>
+    <p></p>
+    <div class="dashboard">
+        <svg id="scatterplot" class="chart"></svg>
+        <svg id="bargraph1" class="chart"></svg>
+        <svg id="bargraph2" class="chart"></svg>
+        <!-- <svg id="histogramdropdown1" ></svg> -->
+    </div>
+    <div class='parent'>
+        <div class='child' id="histogramdropdown1"></div>
+        <div class='child' id="histogramdropdown2"></div>
+    </div>
+</div>
+
+<div class="split right">
+    <h2><p align="center">Map</p></h2>
+    <label for="dropdown3">Select for the Map:</label>
+    <select id="dropdown3">
+        <option selected disabled>Please select an Attribute</option>
+    </select>
+    
+    <!-- Map container with relative positioning -->
+    <div class="viz" style="position: relative; height: 600px;"></div> <!-- This will allow the tooltip to be placed relative to the map -->
+    <div id="legend-container">
+        <div id="legend"></div>
+    </div>
+</div>
+
+<!-- Tooltip container for showing content -->
+<div id="tooltip" 
+     style="position: absolute; 
+            background: rgba(0, 0, 0, 0.8); 
+            color: white; 
+            padding: 10px; 
+            border-radius: 5px; 
+            font-size: 12px; 
+            pointer-events: none; 
+            opacity: 0; 
+            visibility: hidden; 
+            transition: opacity 0.2s, visibility 0.2s; 
+            top: 10px;">
+</div>
+
+<!-- Load JS files -->
+<script src="choroplethMap.js"></script>
+<script src="main.js"></script>
+
+</body>
+</html>

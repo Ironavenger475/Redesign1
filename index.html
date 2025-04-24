@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=0.75"> -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Dashboard</title>
+
+    <!-- D3 and TopoJSON Libraries -->
+    <script src="https://d3js.org/d3.v6.min.js"></script>
+    <script src="https://d3js.org/topojson.v3.min.js"></script>
+
+    <!-- JavaScript Files -->
+    <script defer src="heatmap.js"></script>
+    <script defer src="dashboard.js"></script>
+    <script defer src="matrix.js"></script>
+    <script defer src="main.js"></script>
+
+    <!-- CSS Files -->
+    <link rel="stylesheet" href="split.css">
+    <link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+<div class="split left">
+
+    <!-- Dropdowns for Scatterplot -->
+    <label for="dropdown1">Select X-Axis:</label>
+    <select id="dropdown1">
+        <option selected disabled>Select for the X-Axis</option>
+    </select>
+    <button id="map1button1">Map 1</button>
+    ‎ <!-- Present just to insert space between the buttons -->
+    <button id="map2button1">Map 2</button>
+    <label for="dropdown2">‎ ‎ ‎ Select Y-Axis:</label>
+    <select id="dropdown2">
+        <option selected disabled>Select for the Y-Axis</option>
+    </select>
+    <button id="map1button2">Map 1</button>
+    ‎ 
+    <button id="map2button2">Map 2</button>
+    <p></p>
+
+    <!-- Dashboard Charts -->
+    <div class="dashboard">
+        <svg id="bargraph1" class="chart"></svg>
+        <svg id="scatterplot" class="chart"></svg>
+        <svg id="bargraph2" class="chart"></svg>
+        <div class="center" id="correlationGauge"></div>
+    </div>
+
+    <!-- Additional Data Visualizations -->
+    <div class='child' id="histogramdropdown1"></div>
+    <div class='child' id="scatterplotline"></div>
+    <div class='child' id="histogramdropdown2"></div>
+   
+</div>
+
+<div class="split right">
+
+    <!-- Dropdowns for Maps -->
+    <label for="dropdown3">Map 1‎‎</label>
+    <select id="dropdown3">
+        <option selected disabled>Please select an Attribute for Map 1</option>
+    </select>
+    
+    <label for="dropdown4">‎ ‎ ‎ Map 2‎‎</label>
+    <select id="dropdown4">
+        <option selected disabled>Please select an Attribute for Map 2</option>
+    </select>
+
+    <p></p>
+
+    <!-- Maps Container -->
+    <div class="container">
+        <div>
+            <div id="map1" class="viz" style="position: relative; height: 500px;"></div>
+            <div id="legend-map1" class="legend-container"></div>
+        </div>
+
+        <div>
+            <div id="map2" class="viz" style="position: relative; height: 500px;"></div>
+            <div id="legend-map2" class="legend-container"></div>
+        </div>
+    </div>
+</div>
+
+<!-- Tooltip Container -->
+<div id="tooltip" 
+     style="position: absolute; 
+            background: rgba(0, 0, 0, 0.8); 
+            color: white; 
+            padding: 10px; 
+            border-radius: 5px; 
+            font-size: 12px; 
+            pointer-events: none; 
+            opacity: 0; 
+            transition: opacity 0.2s ease-in-out;">
+</div>
+
+</body>
+</html>
