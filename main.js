@@ -24,7 +24,23 @@ Promise.all([
   const attributes = Object.keys(countyData[0]).filter(attr => attr !== "cnty_fips" && attr !== "county_name" && attr != "display_name" && attr !== "urban_rural_status");
 
   const dropdowns = { map1: "#dropdown3", map2: "#dropdown4" };
-
+  const columns1 = [
+    "hello",
+    "poverty_perc",
+    "percent_obesity",
+    "percent_inactive",
+    "percent_smoking",
+    "elderly_percentage"
+  ];
+  
+  const columns2 = [
+    "world",
+    "percent_high_blood_pressure",
+    "percent_coronary_heart_disease",
+    "percent_stroke",
+    "percent_high_cholesterol",
+    "percent_diabetes"
+  ];
   Object.entries(dropdowns).forEach(([mapId, selector]) => {
     const dropdown = d3.select(selector);
 

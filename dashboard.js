@@ -46,25 +46,52 @@ document.addEventListener("DOMContentLoaded", function () {
         "percent_inactive",
         "percent_smoking",
         "elderly_percentage"
-    ];
-
-    const columns2 = [
+      ];
+      
+      const columns2 = [
         "world",
         "percent_high_blood_pressure",
         "percent_coronary_heart_disease",
         "percent_stroke",
         "percent_high_cholesterol",
         "percent_diabetes"
-    ];
-    dropdown1.selectAll("option")
+      ];
+      
+      // Label formatter function
+      function formatLabel(col) {
+        if (col === "poverty_perc") {
+          return "Poverty Percentage";
+        }
+      
+        let label = col;
+      
+        if (label.startsWith("percent_")) {
+          label = label.replace("percent_", "").replace(/_/g, ' ') + " percentage";
+        } else {
+          label = label.replace(/_/g, ' ');
+        }
+      
+        // Capitalize each word
+        label = label.split(' ').map(word =>
+          word.charAt(0).toUpperCase() + word.slice(1)
+        ).join(' ');
+      
+        return label;
+      }
+      
+      // Populate dropdown1
+      dropdown1.selectAll("option")
         .data(columns1)
         .enter().append("option")
-        .text(d => d);
-
-    dropdown2.selectAll("option")
+        .text(d => formatLabel(d))
+        .attr("value", d => d);
+      
+      // Populate dropdown2
+      dropdown2.selectAll("option")
         .data(columns2)
         .enter().append("option")
-        .text(d => d);
+        .text(d => formatLabel(d))
+        .attr("value", d => d);
 
     function updateCharts() {
         if (!data.length) {
@@ -75,6 +102,8 @@ document.addEventListener("DOMContentLoaded", function () {
         let Attribute1 = dropdown1.node().value;
         let Attribute2 = dropdown2.node().value;
 
+        let label1=formatLabel(Attribute1);
+        let label2=formatLabel(Attribute2);
         console.log("Attribute 1:", Attribute1, "Attribute 2:", Attribute2);
 
         const filteredData = data
@@ -88,12 +117,12 @@ document.addEventListener("DOMContentLoaded", function () {
 
         console.log("Filtered Data for Charts:", filteredData);
         let Title1="Scatterplot";
-        let Title2=Attribute1 + " Vs " + Attribute2;
-        createHistogram(data, Attribute1, "#histogramdropdown1", Attribute1,"#69b3a2");
-        createHistogram(data, Attribute2, "#histogramdropdown2", Attribute2,"#b3697a");
+        let Title2=label1 + " Vs " + label2;
+        createHistogram(data, Attribute1, "#histogramdropdown1", label1,"#69b3a2");
+        createHistogram(data, Attribute2, "#histogramdropdown2", label2,"#b3697a");
         drawScatterplot(filteredData,Title1,Attribute1,Attribute2);
-        drawBarGraph1(filteredData,"Bar chart of " + Attribute1, Attribute1);
-        drawBarGraph2(filteredData,"Bar chart of " + Attribute2, Attribute2);
+        drawBarGraph1(filteredData,"Bar chart of " + label1, Attribute1);
+        drawBarGraph2(filteredData,"Bar chart of " + label2, Attribute2);
         drawCorrelationBar(data, Attribute1, Attribute2);  // For bar chart
         drawCorrelationGauge(data, Attribute1, Attribute2);  // For gauge chart
         drawScatterplotLine(filteredData,"Regression Line of Scatterplot",Attribute1,Attribute2,"#scatterplotline");
